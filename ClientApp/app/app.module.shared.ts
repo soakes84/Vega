@@ -1,16 +1,17 @@
-import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { UniversalModule } from 'angular2-universal';
 
+import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
+import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
-import { MakeService } from './services/make.service';
+import { VehicleService } from './services/vehicle.service';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { MakeService } from './services/make.service';
         VehicleFormComponent
     ],
     imports: [
+        UniversalModule,
         CommonModule,
         HttpModule,
         FormsModule,
@@ -35,7 +37,7 @@ import { MakeService } from './services/make.service';
         ])
     ],
     providers: [
-        MakeService
+        VehicleService
     ]
 })
 export class AppModuleShared {
