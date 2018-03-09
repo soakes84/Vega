@@ -8,7 +8,7 @@ export class VehicleService {
   constructor(private http: Http) { }
 
   getFeatures() {
-    return this.http.get('/api/features')
+    return this.http.get('/api/vehicles/features')
       .map(res => res.json());
   }
 
