@@ -17,7 +17,6 @@ namespace vega.Models
         [StringLength(255)]
         public string ContactName { get; set; }
         [StringLength(255)]
-
         public string ContactEmail { get; set; }
         [Required]
         [StringLength(255)]
