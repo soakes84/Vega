@@ -9,7 +9,7 @@ namespace vega.Persistence
         {
             this.context = context;
         }
-        public async Task Complete()
+        public async Task CompleteAsync()
         {
            await context.SaveChangesAsync();
         }
