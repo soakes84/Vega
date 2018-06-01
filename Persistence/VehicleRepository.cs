@@ -4,7 +4,7 @@ using vega.Models;
 
 namespace vega.Persistence
 {
-    public class VehicleRepository
+    public class VehicleRepository : IVehicleRepository
     {
         private readonly VegaDbContext context;
         public VehicleRepository(VegaDbContext context)
@@ -20,6 +20,11 @@ namespace vega.Persistence
             .Include(v => v.Model)
                 .ThenInclude(m => m.Make)
             .SingleOrDefaultAsync(v => v.Id == id);
+        }
+
+        Task<Vehicle> IVehicleRepository.GetVehicle(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
