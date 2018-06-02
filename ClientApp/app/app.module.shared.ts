@@ -1,7 +1,10 @@
+import { AppErrorHandler } from './app.error-handler';
+import { ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UniversalModule } from 'angular2-universal';
+import { ToastyModule } from 'ng2-toasty';
+//import { UniversalModule } from 'angular2-universal';
 
 import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
 import { CommonModule } from '@angular/common';
@@ -23,10 +26,11 @@ import { VehicleService } from './services/vehicle.service';
         VehicleFormComponent
     ],
     imports: [
-        UniversalModule,
+        FormsModule,
+        ToastyModule.forRoot(),
+    //    UniversalModule,
         CommonModule,
         HttpModule,
-        FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -37,6 +41,7 @@ import { VehicleService } from './services/vehicle.service';
         ])
     ],
     providers: [
+        { provide: ErrorHandler, useClass: AppErrorHandler},
         VehicleService
     ]
 })
