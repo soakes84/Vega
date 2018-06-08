@@ -1,3 +1,4 @@
+import { Contact } from './vehicle';
 
 export interface KeyValuePair {
     id: number;
