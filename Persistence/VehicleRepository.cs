@@ -6,6 +6,7 @@ using vega.Core.Models;
 using vega.Core;
 using System.Linq;
 using System.Linq.Expressions;
+using vega.Extensions;
 
 namespace vega.Persistence
 {
@@ -61,14 +62,10 @@ namespace vega.Persistence
             ["contactName"] = v => v.ContactName,
             ["id"] = v => v.Id
         };
+        
+        query = query.ApplyOrdering(queryObj, columnsMap); 
 
-        if (queryObj.IsSortAscending)
-            query = query.OrderBy(columnsMap[queryObj.SortBy]);
-        else
-            query = query.OrderByDescending(columnsMap[queryObj.SortBy]);
-            
         return await query.ToListAsync();
         }
-      
     }
 }
