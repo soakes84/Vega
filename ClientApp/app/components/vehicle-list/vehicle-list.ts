@@ -33,4 +33,17 @@ export class VehicleListComponent implements OnInit {
         this.filter = {};
         this.onFilterChange();
     }
+
+    sortBy(columnName) {
+        if (this.query.sortBy === columnName) 
+        {
+            this.query.isSortAscending = false;
+        } 
+        else 
+        {
+            this.query.sortBy = columnName;
+            this.query.isSortAscending = true;
+        }
+        this.populateVehicles();
+    }
 }
