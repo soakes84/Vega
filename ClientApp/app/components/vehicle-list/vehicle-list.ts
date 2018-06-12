@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class VehicleListComponent implements OnInit {
-    vehicles!: Vehicle[];
-    makes!: KeyValuePair[];
-    filter: any = {};
+    vehicles: Vehicle[];
+    makes: KeyValuePair[];
+    query: any = {};
+    columns = [
+        {title: 'Id', key:}
+        {title: 'Contact Name', key: 'contactName', isSortable: true}        
+        {title: 'Make', key: 'make', isSortable: false}        
+        {title: 'Model', key: 'model', isSortable: false}        
+    ]
 
     constructor(private vehicleService: VehicleService) { }
 
