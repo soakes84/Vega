@@ -1,3 +1,4 @@
+import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle';
 import { PaginationComponent } from './components/shared/pagination.component';
 import { VehicleListComponent } from './components/vehicle-list/vehicle-list.component';
 import * as Raven from 'raven-js';
@@ -30,6 +31,7 @@ Raven.config('https://459b5673426f466bb4ca2bd48ee6a213@sentry.io/1218503').insta
         HomeComponent,
         VehicleFormComponent,
         VehicleListComponent,
+        ViewVehicleComponent,
         PaginationComponent
     ],
     imports: [
@@ -43,6 +45,7 @@ Raven.config('https://459b5673426f466bb4ca2bd48ee6a213@sentry.io/1218503').insta
             { path: 'home', component: HomeComponent },
             { path: 'vehicles/new', component: VehicleFormComponent},
             { path: 'vehicles/:id', component: VehicleFormComponent},
+            { path: 'vehicles/edit/:id' component: ViewVehicleComponent},
             { path: 'vehicles', component: VehicleListComponent},
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
