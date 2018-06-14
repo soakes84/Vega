@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class VehicleListComponent implements OnInit {
+    private readonly PAGE_SIZE = 3;
+
     queryResult: any = {};
     makes: KeyValuePair[];
     query: any = {
-        pageSize = 3
+        pageSize = this.PAGE_SIZE
     };
     columns = [
         {title: 'Id', key:}
@@ -34,12 +36,16 @@ export class VehicleListComponent implements OnInit {
     }
 
     onFilterChange() {
+      this.query.page = 1;  
       this.populateVehicles();
     }
 
     resetFilter() {
-        this.filter = {};
-        this.onFilterChange();
+        this.query = {
+            page: 1,
+            pageSize: this.Page_Size
+        };
+        this.populateVehicles();
     }
 
     sortBy(columnName) {
