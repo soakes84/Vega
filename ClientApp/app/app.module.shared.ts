@@ -1,3 +1,6 @@
+import { ProgressService, BrowserXhrWithProgress } from './services/progress.service';
+import { BrowserXhr } from '@angular/http';
+import { BrowserXhrWithProgress, ProgressService } from './services/progress.service';
 import { PhotoService } from './services/photo.service';
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle';
 import { PaginationComponent } from './components/shared/pagination.component';
@@ -55,8 +58,10 @@ Raven.config('https://459b5673426f466bb4ca2bd48ee6a213@sentry.io/1218503').insta
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler},
+        { provide: BrowserXhr, useClass: BrowserXhrWithProgress},
         VehicleService,
-        PhotoService
+        PhotoService,
+        ProgressService
     ]
 })
 export class AppModuleShared {
