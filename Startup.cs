@@ -12,6 +12,7 @@ using vega.Persistence;
 using AutoMapper;
 using vega.Core;
 using vega.Core.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace vega
 {
@@ -56,6 +57,12 @@ namespace vega
             // }
 
             app.UseStaticFiles();
+
+            var options = new JwtBearerOptions
+            {
+                Audience = "https://api.vega.com",
+                Authority = "https://vegaproject.auth0.com"
+            };
 
             app.UseMvc(routes =>
             {
