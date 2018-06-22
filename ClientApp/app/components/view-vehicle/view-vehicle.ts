@@ -58,8 +58,6 @@ export class ViewVehicleComponent implements OnInit {
     }
   }
   uploadPhoto() {
-    var nativeElement: HTMLInputElement = this.fileInput.nativeElement; 
-
     this.progressService.startTracking()
       .subscribe(progress => {
       this.zone.run(() => {
@@ -68,10 +66,23 @@ export class ViewVehicleComponent implements OnInit {
     },
     null,
     () => { this.progress = null; });
+
+    var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
+    var file = nativeElement.files[0];
+    nativeElement.value = '';
       
     this.photoService.upload(this.vehicleId, nativeElement.files[0])
       .subscribe(photo => {
           this.photos.push(photo);
+      },
+      err => {
+        this.toasty.error({
+          title: 'Error',
+          msg: err.text(),
+          theme: 'bootstrap',
+          showClose: true,
+          timeout: 5000
+        });
       });
   }
 }
