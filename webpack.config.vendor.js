@@ -12,9 +12,12 @@ const treeShakableModules = [
     '@angular/platform-browser',
     '@angular/platform-browser-dynamic',
     '@angular/router',
+    '@angular/platform-server',
+    '@angular2-jwt',
     'zone.js',
 ];
 const nonTreeShakableModules = [
+    'auth0-lock',
     'bootstrap',
     'bootstrap/dist/css/bootstrap.css',
     'es6-promise',
