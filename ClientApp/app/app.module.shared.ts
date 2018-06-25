@@ -1,3 +1,5 @@
+import { AdminComponent } from './components/admin/admin/component';
+import { Auth } from './services/auth.service';
 import { ProgressService, BrowserXhrWithProgress } from './services/progress.service';
 import { BrowserXhr } from '@angular/http';
 import { BrowserXhrWithProgress, ProgressService } from './services/progress.service';
@@ -36,7 +38,8 @@ Raven.config('https://459b5673426f466bb4ca2bd48ee6a213@sentry.io/1218503').insta
         VehicleFormComponent,
         VehicleListComponent,
         ViewVehicleComponent,
-        PaginationComponent
+        PaginationComponent,
+        AdminComponent
     ],
     imports: [
         FormsModule,
@@ -51,6 +54,7 @@ Raven.config('https://459b5673426f466bb4ca2bd48ee6a213@sentry.io/1218503').insta
             { path: 'vehicles/:id', component: ViewVehicleComponent},
             { path: 'vehicles/edit/:id', component: VehicleFormComponent},
             { path: 'vehicles', component: VehicleListComponent},
+            { path: 'admin', component: AdminComponent}.
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
