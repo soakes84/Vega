@@ -1,8 +1,8 @@
-import { AdminComponent } from './components/admin/admin/component';
+import { AuthGuard } from './services/auth-guard.service';
+import { AdminComponent } from './components/admin/admin.component';
 import { Auth } from './services/auth.service';
 import { ProgressService, BrowserXhrWithProgress } from './services/progress.service';
 import { BrowserXhr } from '@angular/http';
-import { BrowserXhrWithProgress, ProgressService } from './services/progress.service';
 import { PhotoService } from './services/photo.service';
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle';
 import { PaginationComponent } from './components/shared/pagination.component';
@@ -54,7 +54,7 @@ Raven.config('https://459b5673426f466bb4ca2bd48ee6a213@sentry.io/1218503').insta
             { path: 'vehicles/:id', component: ViewVehicleComponent},
             { path: 'vehicles/edit/:id', component: VehicleFormComponent},
             { path: 'vehicles', component: VehicleListComponent},
-            { path: 'admin', component: AdminComponent}.
+            { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
@@ -63,6 +63,8 @@ Raven.config('https://459b5673426f466bb4ca2bd48ee6a213@sentry.io/1218503').insta
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler},
         { provide: BrowserXhr, useClass: BrowserXhrWithProgress},
+        Auth,
+        AuthGuard,
         VehicleService,
         PhotoService,
         ProgressService
