@@ -13,48 +13,52 @@ export class Auth {
 
   constructor()
   {
+    this.readUserFromLocalStorage();
+
+    this.lock.on("authenticated", this.onUserAuthenticated);
+  }
+
+  private onUserAuthenticated(authResult: { accessToken: string; }) {
+    localStorage.setItem('token', authResult.accessToken);
+
+    this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
+      if (error)
+        throw error;
+
+      localStorage.setItem('profile', JSON.stringify(profile));
+
+      this.readUserFromLocalStorage();
+    });
+  }
+
+  private readUserFromLocalStorage() {
     this.profile = JSON.parse(localStorage.getItem('profile'));
 
     var token = localStorage.getItem('token');
-    if (token)
-    {
+    if (token) {
       var jwtHelper = new JwtHelper();
       var decodedToken = jwtHelper.decodeToken(token);
       this.roles = decodedToken['https://vega.com/roles'];
     }
-
-    this.lock.on("authenticated", (authResult) => {
-      localStorage.setItem('token', authResult.accessToken);
-
-      var jwtHelper = new JwtHelper();
-      var decodedToken = jwtHelper.decodeToken(authResult.accessToken);
-      this.roles = decodedToken['https://vega.com/roles'];
-
-      this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
-        if (error)
-          throw error;
-
-        console.log(profile);
-        localStorage.setItem('profile', JSON.stringify(profile));
-        this.profile = profile;
-      });
-    });
   }
 
-  public isInRole(roleName: string) 
-  {
+  public isInRole(roleName: string) {
     return this.roles.indexOf(roleName) > -1;
   }
 
   public login() {
+    // Call the show method to display the widget.
     this.lock.show();
   }
 
   public authenticated() {
+    // Check if there's an unexpired JWT
+    // This searches for an item in localStorage with key == 'token'
     return tokenNotExpired('token');
   }
 
   public logout() {
+    // Remove token from localStorage
     localStorage.removeItem('token');
     localStorage.removeItem('profile');
     this.profile = null;
