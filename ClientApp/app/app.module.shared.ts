@@ -25,6 +25,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { VehicleService } from './services/vehicle.service';
+import { AUTH_PROVIDERS } from 'angular2-jwt/angular2-jwt';
 
 Raven.config('https://459b5673426f466bb4ca2bd48ee6a213@sentry.io/1218503').install();
 
@@ -62,12 +63,11 @@ Raven.config('https://459b5673426f466bb4ca2bd48ee6a213@sentry.io/1218503').insta
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler},
-        { provide: BrowserXhr, useClass: BrowserXhrWithProgress},
         Auth,
         AuthGuard,
+        AUTH_PROVIDERS,
         VehicleService,
-        PhotoService,
-        ProgressService
+        PhotoService
     ]
 })
 export class AppModuleShared {
